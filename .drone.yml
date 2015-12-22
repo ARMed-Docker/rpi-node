@@ -19,7 +19,9 @@ publish:
       - argon$$FLAVOR
     file: 4.2/$$FLAVOR/Dockerfile
     when:
-      branch: matrixbuild
+      branch:
+        - matrixbuild
+        - master
 
   docker:
     username: $$DOCKER_USER
@@ -33,7 +35,9 @@ publish:
       - $$FLAVOR
     file: 5.3/$$FLAVOR/Dockerfile
     when:
-      branch: matrixbuild
+      branch:
+        - matrixbuild
+        - master
 
 notify:
   slack:
