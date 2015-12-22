@@ -1,14 +1,10 @@
-build:
-  image: firecyberice/rpi-docker:1.10.0-dev
-  extra_hosts:
-    - docker
-  environment:
-    - DOCKER_HOST=tcp://localhost:2375
 
-compose:
-  docker:
-    privileged: true
-    image: firecyberice/rpi-docker:1.10.0-dev-dind
+matrix:
+  FLAVOR:
+    - -slim-test
+    - -onbuild-test
+    - -wheezy-test
+    - ""
 
 publish:
   docker:
@@ -17,11 +13,11 @@ publish:
     email: $$DOCKER_EMAIL
     repo: hypriot/rpi-node
     tag:
-      - '4.2.3'
-      - '4.2'
-      - '4'
-      - argon
-    file: 4.2/Dockerfile
+      - '4.2.3'$$FLAVOR
+      - '4.2'$$FLAVOR
+      - '4'$$FLAVOR
+      - argon$$FLAVOR
+    file: 4.2/$$FLAVOR/Dockerfile
     when:
       branch: master
 
@@ -31,94 +27,11 @@ publish:
     email: $$DOCKER_EMAIL
     repo: hypriot/rpi-node
     tag:
-      - 4.2.3-onbuild
-      - 4.2-onbuild
-      - 4-onbuild
-      - argon-onbuild
-    file: 4.2/onbuild/Dockerfile
-    when:
-      branch: master
-
-  docker:
-    username: $$DOCKER_USER
-    password: $$DOCKER_PASS
-    email: $$DOCKER_EMAIL
-    repo: hypriot/rpi-node
-    tag:
-      - 4.2.3-wheezy
-      - 4.2-wheezy
-      - 4-wheezy
-      - argon-wheezy
-    file: 4.2/wheezy/Dockerfile
-    when:
-      branch: master
-
-  docker:
-    username: $$DOCKER_USER
-    password: $$DOCKER_PASS
-    email: $$DOCKER_EMAIL
-    repo: hypriot/rpi-node
-    tag:
-      - 4.2.3-slim
-      - 4.2-slim
-      - 4-slim
-    file: 4.2/slim/Dockerfile
-    when:
-      branch: master
-
-  docker:
-    username: $$DOCKER_USER
-    password: $$DOCKER_PASS
-    email: $$DOCKER_EMAIL
-    repo: hypriot/rpi-node
-    tag:
-      - '5.3.0'
-      - '5.3'
-      - '5'
-      - latest
-    file: 5.3/Dockerfile
-    when:
-      branch: master
-
-  docker:
-    username: $$DOCKER_USER
-    password: $$DOCKER_PASS
-    email: $$DOCKER_EMAIL
-    repo: hypriot/rpi-node
-    tag:
-      - 5.3.0-onbuild
-      - 5.3-onbuild
-      - 5-onbuild
-      - onbuild
-    file: 5.3/onbuild/Dockerfile
-    when:
-      branch: master
-
-  docker:
-    username: $$DOCKER_USER
-    password: $$DOCKER_PASS
-    email: $$DOCKER_EMAIL
-    repo: hypriot/rpi-node
-    tag:
-      - 5.3.0-wheezy
-      - 5.3-wheezy
-      - 5-wheezy
-      - wheezy
-    file: 5.3/wheezy/Dockerfile
-    when:
-      branch: master
-
-  docker:
-    username: $$DOCKER_USER
-    password: $$DOCKER_PASS
-    email: $$DOCKER_EMAIL
-    repo: hypriot/rpi-node
-    tag:
-      - 5.3.0-slim
-      - 5.3-slim
-      - 5-slim
-      - slim
-    file: 5.3/slim/Dockerfile
+      - '5.3.0'$$FLAVOR
+      - '5.3'$$FLAVOR
+      - '5'$$FLAVOR
+      - $$FLAVOR
+    file: 5.3/$$FLAVOR/Dockerfile
     when:
       branch: master
 
